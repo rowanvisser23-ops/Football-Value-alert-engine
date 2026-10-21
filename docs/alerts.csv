@@ -1,1 +1,3 @@
 snapshot_utc,kickoff_utc,league,home_team,away_team,side,book,price,pinnacle_price,edge_pct,pinnacle_close,clv_pct,score,return_units,rule_version,alert_id
+2026-10-21T14:40:06+00:00,2026-10-24T11:30:00Z,League One,Huddersfield Town,Wigan Athletic,home,ladbrokes_uk,1.4,1.33,2.72,,,,,v1-live,efe79bde5c4eb41de869c2c24c911b41:home
+2026-10-21T14:40:06+00:00,2026-10-24T12:00:00Z,Segunda Division,Córdoba,SD Eibar,draw,betvictor,3.6,3.24,5.02,,,,,v1-live,12c9efa353bb65bb300866cd78a9b101:draw
