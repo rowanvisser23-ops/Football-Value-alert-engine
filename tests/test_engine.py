@@ -77,6 +77,22 @@ class T(unittest.TestCase):
         s = report.stats(rows)
         self.assertEqual(s["settled"], 1)
 
+    def test_verdict_stages(self):
+        import random
+        rnd = random.Random(3)
+        def rows(n, mu, sd=7.2):
+            return [{"rule_version": "v1-live", "snapshot_utc": f"2026-11-{i:05d}", "alert_id": str(i),
+                     "clv_pct": round(rnd.gauss(mu, sd), 2), "return_units": ""} for i in range(n)]
+        self.assertEqual(report.verdict(rows(40, 3))["status"], "collecting")
+        self.assertEqual(report.verdict(rows(100, 4))["status"], "confirmed")
+        self.assertEqual(report.verdict(rows(100, -3))["status"], "failed")
+        other = rows(100, 4)
+        for r in other:
+            r["rule_version"] = "v2"
+        self.assertEqual(report.verdict(other)["status"], "collecting")  # only v1-live counts
+        mid = [dict(r, clv_pct=0.5 + (1 if i % 2 else -1) * 6) for i, r in enumerate(rows(150, 0))]
+        self.assertEqual(report.verdict(mid)["status"], "continuing")
+
     def test_stale_pinnacle_ignored(self):
         t0 = rule.now_utc()
         ko = (t0 + timedelta(hours=30)).strftime("%Y-%m-%dT%H:%M:%SZ")

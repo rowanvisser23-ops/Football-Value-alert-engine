@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-10-21T14:40:07+00:00",
+  "built_utc": "2026-10-21T15:43:49+00:00",
   "rule_version": "v1-live",
   "rule": {
     "sharp_book": "pinnacle",
@@ -34,6 +34,21 @@
     "profit_units": 0.0,
     "roi_pct": null,
     "roi_se_pct": null
+  },
+  "verdict": {
+    "with_close": 0,
+    "status": "collecting",
+    "text": "Collecting: 0 of 100 alerts with a closing price"
+  },
+  "pass_mark": {
+    "rule_version": "v1-live",
+    "stage1_n": 100,
+    "stage1_min_clv": 1.5,
+    "stage2_n": 200,
+    "stage2_min_clv": 1.0,
+    "min_beat_pct": 55.0,
+    "profit_review_n": 500,
+    "profit_review_roi": -10.0
   },
   "by_league": {
     "League One": {

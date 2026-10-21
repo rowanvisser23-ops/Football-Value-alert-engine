@@ -71,6 +71,58 @@ def group(rows, key):
     return {k: stats(v) for k, v in sorted(out.items())}
 
 
+# Pass mark for rule v1-live, fixed 21 October 2026 before any alert had a closing price.
+# See PASS_MARK.md. Judged only at two checkpoints, on alerts in the order they were logged.
+PASS_MARK = {
+    "rule_version": "v1-live",
+    "stage1_n": 100, "stage1_min_clv": 1.5,
+    "stage2_n": 200, "stage2_min_clv": 1.0,
+    "min_beat_pct": 55.0,
+    "profit_review_n": 500, "profit_review_roi": -10.0,
+}
+
+
+def _clv_test(clvs: list[float]) -> dict:
+    n = len(clvs)
+    m = sum(clvs) / n
+    sd = math.sqrt(sum((v - m) ** 2 for v in clvs) / (n - 1))
+    lower = m - 1.96 * sd / math.sqrt(n)
+    beat = 100 * sum(1 for v in clvs if v > 0) / n
+    return {"n": n, "mean_clv_pct": round(m, 2), "lower95_pct": round(lower, 2), "beat_close_pct": round(beat, 1)}
+
+
+def verdict(rows: list[dict]) -> dict:
+    pm = PASS_MARK
+    v1 = [r for r in rows if r.get("rule_version") == pm["rule_version"]]
+    timed = sorted((r for r in v1 if r["clv_pct"] != ""), key=lambda r: (r["snapshot_utc"], r["alert_id"]))
+    clvs = [float(r["clv_pct"]) for r in timed]
+    out = {"with_close": len(clvs)}
+    passes = lambda t, floor: t["mean_clv_pct"] >= floor and t["lower95_pct"] > 0 and t["beat_close_pct"] >= pm["min_beat_pct"]
+    if len(clvs) < pm["stage1_n"]:
+        out.update(status="collecting", text=f"Collecting: {len(clvs)} of {pm['stage1_n']} alerts with a closing price")
+    else:
+        t1 = _clv_test(clvs[:pm["stage1_n"]])
+        out["stage1"] = t1
+        if passes(t1, pm["stage1_min_clv"]):
+            out.update(status="confirmed", text="Edge confirmed at 100 alerts")
+        elif t1["mean_clv_pct"] <= 0:
+            out.update(status="failed", text="Not confirmed at 100 alerts: mean CLV at or below zero, v1 stopped")
+        elif len(clvs) < pm["stage2_n"]:
+            out.update(status="continuing",
+                       text=f"Inconclusive at 100 alerts; continuing: {len(clvs)} of {pm['stage2_n']}")
+        else:
+            t2 = _clv_test(clvs[:pm["stage2_n"]])
+            out["stage2"] = t2
+            if passes(t2, pm["stage2_min_clv"]):
+                out.update(status="confirmed", text="Edge confirmed at 200 alerts")
+            else:
+                out.update(status="failed", text="Not confirmed at 200 alerts, v1 stopped")
+    rets = [float(r["return_units"]) for r in v1 if r["return_units"] != ""]
+    if len(rets) >= pm["profit_review_n"] and 100 * sum(rets) / len(rets) < pm["profit_review_roi"]:
+        out["profit_flag"] = f"Review: ROI below {pm['profit_review_roi']:.0f}% after {len(rets)} settled alerts"
+    return out
+
+
 def build() -> None:
     os.makedirs(DOCS, exist_ok=True)
     rows = merged()
@@ -83,6 +135,8 @@ def build() -> None:
             "leagues": list(config.SPORTS.values()),
         },
         "overall": stats(rows),
+        "verdict": verdict(rows),
+        "pass_mark": PASS_MARK,
         "by_league": group(rows, "league"),
         "by_book": group(rows, "book"),
         "credits_used_this_month": ledger.credits_used_this_month(),
@@ -146,6 +200,9 @@ th{{font-weight:600}} code{{font-size:13px}}
 <div class="kpi"><span class="muted">Profit (1-unit stakes)</span><b>{o['profit_units']}</b></div>
 <div class="kpi"><span class="muted">ROI</span><b>{_fmt(o['roi_pct'],'%')}</b></div>
 </div>
+<h2>Verdict</h2>
+<p><b>{html.escape(s['verdict']['text'])}</b>{('<br>' + html.escape(s['verdict']['profit_flag'])) if s['verdict'].get('profit_flag') else ''}</p>
+<p class="muted">Pass mark, fixed on 21 October 2026 before any result was known (<a href="https://github.com/rowanvisser23-ops/Football-Value-alert-engine/blob/main/PASS_MARK.md">PASS_MARK.md</a>). Judged at the first 100 alerts with a closing price: confirmed if mean CLV is at least +1.5%, its 95% lower bound is above zero and at least 55% beat the close; stopped if mean CLV is zero or below; otherwise judged again at 200, needing mean CLV of at least +1.0% with the same other two tests. Profit is reported but does not decide the verdict.</p>
 <h2>The rule</h2>
 <p>Fair price = Pinnacle's odds with the margin removed (power method). An alert is logged when the best price among {html.escape(', '.join(s['rule']['uk_books']))} is more than {s['rule']['edge_threshold_pct']:.0f}% above the fair price, at odds below {s['rule']['max_odds']}. Leagues: {html.escape(', '.join(s['rule']['leagues']))}. CLV compares the alert price with Pinnacle's last price before kick-off, margin removed the same way.</p>
 <h2>By league</h2><div class="scroll">{table(s['by_league'], 'League')}</div>

@@ -13,6 +13,8 @@ Information only. It does not place bets. 18+. BeGambleAware.org.
 
 Basis: Football Betting Research, Beat the Odds Test 3 (2015/16–2024/25 historical data). The live bookmaker set differs from the historical test (no Bet365 or bwin, more UK books), so this is a genuinely new forward test.
 
+The pass mark that decides whether the edge is real was fixed before any result was known: see [PASS_MARK.md](PASS_MARK.md).
+
 Changing any value in `engine/config.py` requires a new `RULE_VERSION`. Old alerts keep the version that produced them.
 
 ## Schedule (UTC)
