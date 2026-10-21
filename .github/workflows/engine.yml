@@ -1,0 +1,57 @@
+name: value-alert-engine
+
+on:
+  schedule:
+    - cron: "0 10 * * 5"       # Friday 10:00 UTC: weekend alert snapshot
+    - cron: "0 10 * * 2"       # Tuesday 10:00 UTC: midweek alert snapshot
+    - cron: "*/30 10-21 * * *" # every 30 min: closing prices for alerted matches about to start
+    - cron: "30 5 * * *"       # 05:30 UTC daily: results for alerted matches
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "alerts | close | scores | report"
+        required: true
+        default: report
+
+permissions:
+  contents: write
+
+concurrency:
+  group: engine
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pick mode
+        id: mode
+        run: |
+          case "${{ github.event.schedule }}" in
+            "0 10 * * 5"|"0 10 * * 2") echo "mode=alerts" >> "$GITHUB_OUTPUT" ;;
+            "*/30 10-21 * * *") echo "mode=close" >> "$GITHUB_OUTPUT" ;;
+            "30 5 * * *") echo "mode=scores" >> "$GITHUB_OUTPUT" ;;
+            *) echo "mode=${{ github.event.inputs.mode || 'report' }}" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - name: Tests
+        run: python -m unittest discover tests
+      - name: Run engine
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python -m engine.run ${{ steps.mode.outputs.mode }}
+      - name: Commit ledger
+        run: |
+          git config user.name "value-alert-engine"
+          git config user.email "actions@users.noreply.github.com"
+          git add ledger data docs
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "${{ steps.mode.outputs.mode }} run $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase
+            git push
+          fi
