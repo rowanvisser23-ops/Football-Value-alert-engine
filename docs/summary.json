@@ -1,0 +1,41 @@
+{
+  "built_utc": "2026-10-21T14:18:13+00:00",
+  "rule_version": "v1-live",
+  "rule": {
+    "sharp_book": "pinnacle",
+    "uk_books": [
+      "williamhill",
+      "betvictor",
+      "ladbrokes_uk",
+      "coral",
+      "skybet",
+      "paddypower",
+      "betfred_uk",
+      "betway",
+      "unibet_uk"
+    ],
+    "edge_threshold_pct": 2.0,
+    "max_odds": 4.0,
+    "leagues": [
+      "Championship",
+      "League One",
+      "League Two",
+      "Serie B",
+      "Segunda Division",
+      "Belgian Pro League"
+    ]
+  },
+  "overall": {
+    "alerts": 0,
+    "with_close": 0,
+    "mean_clv_pct": null,
+    "beat_close_pct": null,
+    "settled": 0,
+    "profit_units": 0.0,
+    "roi_pct": null,
+    "roi_se_pct": null
+  },
+  "by_league": {},
+  "by_book": {},
+  "credits_used_this_month": 0
+}

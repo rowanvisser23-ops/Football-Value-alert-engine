@@ -1,0 +1,31 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Value Alert Record</title>
+<style>
+:root{--bg:#f7f6f2;--fg:#1d1d1b;--muted:#6b6a65;--line:#dcdad3;--card:#fff;--accent:#1f6f50}
+@media (prefers-color-scheme:dark){:root{--bg:#151614;--fg:#ecebe6;--muted:#a3a29c;--line:#30312d;--card:#1d1e1b;--accent:#6fc39c}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:26px;margin:0 0 4px} h2{font-size:18px;margin:32px 0 8px}
+.muted{color:var(--muted)} .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font-size:24px;color:var(--accent)} .scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:13.5px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;white-space:nowrap}
+th{font-weight:600} code{font-size:13px}
+</style></head><body><main>
+<h1>Value Alert Record</h1>
+<p class="muted">Every alert is logged with a timestamp before kick-off and committed to this public repository; the commit history is the proof that nothing has been changed afterwards. Rule v1-live. Last updated 2026-10-21 14:18 UTC.</p>
+<div class="kpis">
+<div class="kpi"><span class="muted">Alerts</span><b>0</b></div>
+<div class="kpi"><span class="muted">Mean CLV</span><b>–</b></div>
+<div class="kpi"><span class="muted">Beat the close</span><b>–</b></div>
+<div class="kpi"><span class="muted">Profit (1-unit stakes)</span><b>0.0</b></div>
+<div class="kpi"><span class="muted">ROI</span><b>–</b></div>
+</div>
+<h2>The rule</h2>
+<p>Fair price = Pinnacle's odds with the margin removed (power method). An alert is logged when the best price among williamhill, betvictor, ladbrokes_uk, coral, skybet, paddypower, betfred_uk, betway, unibet_uk is more than 2% above the fair price, at odds below 4.0. Leagues: Championship, League One, League Two, Serie B, Segunda Division, Belgian Pro League. CLV compares the alert price with Pinnacle's last price before kick-off, margin removed the same way.</p>
+<h2>By league</h2><div class="scroll"><table><thead><tr><th>League</th><th>Alerts</th><th>Mean CLV</th><th>Beat close</th><th>Settled</th><th>ROI</th></tr></thead><tbody><tr><td colspan=6>No alerts yet</td></tr></tbody></table></div>
+<h2>By bookmaker</h2><div class="scroll"><table><thead><tr><th>Bookmaker</th><th>Alerts</th><th>Mean CLV</th><th>Beat close</th><th>Settled</th><th>ROI</th></tr></thead><tbody><tr><td colspan=6>No alerts yet</td></tr></tbody></table></div>
+<h2>Alerts (latest 200)</h2><div class="scroll"><table><thead><tr><th>Logged (UTC)</th><th>Kick-off (UTC)</th><th>League</th><th>Match</th><th>Pick</th><th>Book</th><th>Price</th><th>Edge</th><th>Pinnacle close</th><th>CLV</th><th>Score</th><th>Return</th></tr></thead><tbody><tr><td colspan=12>No alerts yet</td></tr></tbody></table></div>
+<p class="muted">Full record: <a href="alerts.csv">alerts.csv</a> · <a href="summary.json">summary.json</a>. Information only, not betting advice. 18+. BeGambleAware.org</p>
+</main></body></html>
