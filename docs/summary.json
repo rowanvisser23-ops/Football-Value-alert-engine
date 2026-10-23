@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-10-23T14:39:17+00:00",
+  "built_utc": "2026-10-23T14:41:15+00:00",
   "rule_version": "v1-live",
   "rule": {
     "sharp_book": "pinnacle",
@@ -26,7 +26,7 @@
     ]
   },
   "overall": {
-    "alerts": 2,
+    "alerts": 3,
     "with_close": 0,
     "mean_clv_pct": null,
     "beat_close_pct": null,
@@ -52,6 +52,16 @@
   },
   "by_league": {
     "League One": {
+      "alerts": 1,
+      "with_close": 0,
+      "mean_clv_pct": null,
+      "beat_close_pct": null,
+      "settled": 0,
+      "profit_units": 0.0,
+      "roi_pct": null,
+      "roi_se_pct": null
+    },
+    "League Two": {
       "alerts": 1,
       "with_close": 0,
       "mean_clv_pct": null,
@@ -92,7 +102,17 @@
       "profit_units": 0.0,
       "roi_pct": null,
       "roi_se_pct": null
+    },
+    "skybet": {
+      "alerts": 1,
+      "with_close": 0,
+      "mean_clv_pct": null,
+      "beat_close_pct": null,
+      "settled": 0,
+      "profit_units": 0.0,
+      "roi_pct": null,
+      "roi_se_pct": null
     }
   },
-  "credits_used_this_month": 6
+  "credits_used_this_month": 12
 }
