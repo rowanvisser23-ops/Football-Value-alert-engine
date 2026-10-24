@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-10-24T09:42:34+00:00",
+  "built_utc": "2026-10-24T13:49:14+00:00",
   "rule_version": "v1-live",
   "rule": {
     "sharp_book": "pinnacle",
@@ -27,18 +27,18 @@
   },
   "overall": {
     "alerts": 3,
-    "with_close": 0,
-    "mean_clv_pct": null,
-    "beat_close_pct": null,
+    "with_close": 1,
+    "mean_clv_pct": 1.89,
+    "beat_close_pct": 100.0,
     "settled": 0,
     "profit_units": 0.0,
     "roi_pct": null,
     "roi_se_pct": null
   },
   "verdict": {
-    "with_close": 0,
+    "with_close": 1,
     "status": "collecting",
-    "text": "Collecting: 0 of 100 alerts with a closing price"
+    "text": "Collecting: 1 of 100 alerts with a closing price"
   },
   "pass_mark": {
     "rule_version": "v1-live",
@@ -63,9 +63,9 @@
     },
     "League Two": {
       "alerts": 1,
-      "with_close": 0,
-      "mean_clv_pct": null,
-      "beat_close_pct": null,
+      "with_close": 1,
+      "mean_clv_pct": 1.89,
+      "beat_close_pct": 100.0,
       "settled": 0,
       "profit_units": 0.0,
       "roi_pct": null,
@@ -105,14 +105,14 @@
     },
     "skybet": {
       "alerts": 1,
-      "with_close": 0,
-      "mean_clv_pct": null,
-      "beat_close_pct": null,
+      "with_close": 1,
+      "mean_clv_pct": 1.89,
+      "beat_close_pct": 100.0,
       "settled": 0,
       "profit_units": 0.0,
       "roi_pct": null,
       "roi_se_pct": null
     }
   },
-  "credits_used_this_month": 12
+  "credits_used_this_month": 13
 }
