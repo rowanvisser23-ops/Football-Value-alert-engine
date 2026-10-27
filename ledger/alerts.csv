@@ -2,3 +2,4 @@ alert_id,event_id,rule_version,snapshot_utc,kickoff_utc,sport_key,league,home_te
 efe79bde5c4eb41de869c2c24c911b41:home,efe79bde5c4eb41de869c2c24c911b41,v1-live,2026-10-21T14:40:06+00:00,2026-10-24T11:30:00Z,soccer_england_league1,League One,Huddersfield Town,Wigan Athletic,home,ladbrokes_uk,1.4,1.33,0.73375,2.72
 12c9efa353bb65bb300866cd78a9b101:draw,12c9efa353bb65bb300866cd78a9b101,v1-live,2026-10-21T14:40:06+00:00,2026-10-24T12:00:00Z,soccer_spain_segunda_division,Segunda Division,Córdoba,SD Eibar,draw,betvictor,3.6,3.24,0.29171,5.02
 ed588449e6e4e7616b0595a22e52228b:draw,ed588449e6e4e7616b0595a22e52228b,v1-live,2026-10-23T14:41:13+00:00,2026-10-24T14:00:00Z,soccer_england_league2,League Two,Gillingham,Grimsby Town,draw,skybet,3.8,3.45,0.27214,3.41
+cc41a68f2e42d32c3713cb93a9e0b9c2:draw,cc41a68f2e42d32c3713cb93a9e0b9c2,v1-live,2026-10-27T15:46:47+00:00,2026-10-28T18:00:00Z,soccer_italy_serie_b,Serie B,Pisa,Palermo,draw,betvictor,3.4,3.13,0.30311,3.06

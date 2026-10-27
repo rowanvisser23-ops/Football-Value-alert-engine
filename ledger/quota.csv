@@ -15,3 +15,9 @@ time_utc,endpoint,sport_key,cost,remaining
 2026-10-25T09:59:28+00:00,scores,soccer_england_league1,2,485
 2026-10-25T09:59:28+00:00,scores,soccer_spain_segunda_division,2,483
 2026-10-25T09:59:28+00:00,scores,soccer_england_league2,2,481
+2026-10-27T15:46:48+00:00,odds,soccer_efl_champ,1,480
+2026-10-27T15:46:48+00:00,odds,soccer_england_league1,1,479
+2026-10-27T15:46:48+00:00,odds,soccer_england_league2,1,478
+2026-10-27T15:46:48+00:00,odds,soccer_italy_serie_b,1,477
+2026-10-27T15:46:48+00:00,odds,soccer_spain_segunda_division,1,476
+2026-10-27T15:46:49+00:00,odds,soccer_belgium_first_div,1,475
