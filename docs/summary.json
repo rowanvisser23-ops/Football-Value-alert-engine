@@ -1,5 +1,5 @@
 {
-  "built_utc": "2026-10-29T01:08:24+00:00",
+  "built_utc": "2026-10-29T11:39:13+00:00",
   "rule_version": "v1-live",
   "rule": {
     "sharp_book": "pinnacle",
@@ -30,10 +30,10 @@
     "with_close": 1,
     "mean_clv_pct": 1.89,
     "beat_close_pct": 100.0,
-    "settled": 3,
-    "profit_units": -1.6,
-    "roi_pct": -53.33,
-    "roi_se_pct": 46.67
+    "settled": 4,
+    "profit_units": 0.8,
+    "roi_pct": 20.0,
+    "roi_se_pct": 80.42
   },
   "verdict": {
     "with_close": 1,
@@ -86,9 +86,9 @@
       "with_close": 0,
       "mean_clv_pct": null,
       "beat_close_pct": null,
-      "settled": 0,
-      "profit_units": 0.0,
-      "roi_pct": null,
+      "settled": 1,
+      "profit_units": 2.4,
+      "roi_pct": 240.0,
       "roi_se_pct": null
     }
   },
@@ -98,10 +98,10 @@
       "with_close": 0,
       "mean_clv_pct": null,
       "beat_close_pct": null,
-      "settled": 1,
-      "profit_units": -1.0,
-      "roi_pct": -100.0,
-      "roi_se_pct": null
+      "settled": 2,
+      "profit_units": 1.4,
+      "roi_pct": 70.0,
+      "roi_se_pct": 170.0
     },
     "ladbrokes_uk": {
       "alerts": 1,
@@ -124,5 +124,5 @@
       "roi_se_pct": null
     }
   },
-  "credits_used_this_month": 25
+  "credits_used_this_month": 27
 }
